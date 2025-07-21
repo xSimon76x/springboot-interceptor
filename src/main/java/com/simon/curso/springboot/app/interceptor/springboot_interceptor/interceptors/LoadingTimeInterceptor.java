@@ -1,5 +1,8 @@
 package com.simon.curso.springboot.app.interceptor.springboot_interceptor.interceptors;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -8,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,6 +37,18 @@ public class LoadingTimeInterceptor implements HandlerInterceptor {
         Random random = new Random();
         int delay = random.nextInt(2000);
         Thread.sleep(delay);
+
+        // En caso de que se necesite detener la API en el interceptor
+        // Map<String, String> json = new HashMap<>();
+        // json.put("error", "no tienes acceso a esta ruta!");
+        // json.put("date", new Date().toString());
+        
+        // ObjectMapper mapper = new ObjectMapper();
+        // String jsonString = mapper.writeValueAsString(json);
+        // response.setContentType("application/json");
+        // response.setStatus(401);
+        // response.getWriter().write(jsonString);
+        // return false;
         return true;
     }
 
